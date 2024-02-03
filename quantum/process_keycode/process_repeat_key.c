@@ -30,6 +30,12 @@ static bool remember_last_key(uint16_t keycode, keyrecord_t* record, uint8_t* re
         case QK_TO ... QK_TO_MAX:
         case QK_TOGGLE_LAYER ... QK_TOGGLE_LAYER_MAX:
         case QK_LAYER_TAP_TOGGLE ... QK_LAYER_TAP_TOGGLE_MAX:
+        // asr here ignore TapDance because I use this for MO/TG layers :)
+        case QK_TAP_DANCE ... QK_TAP_DANCE_MAX:
+        // also asr, I don't want to repeat custom keys
+        case QK_KB_0 ... QK_KB_24:
+        // also asr, KC_NO:
+        case KC_NO:
         // Ignore mod keys.
         case KC_LCTL ... KC_RGUI:
         case KC_HYPR:

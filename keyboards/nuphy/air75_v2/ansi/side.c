@@ -833,6 +833,33 @@ void rgb_test_show(void)
     wait_ms(500);
 }
 
+void layer_led_show(void) {
+    switch(get_highest_layer(layer_state)) {
+    case 5:
+        if (IS_LAYER_ON_STATE(layer_state, 3)) break;
+        set_left_rgb(0x10, 0x00, 0x33);
+        break;
+    case 6:
+        set_left_rgb(0xff, 0x00, 0x00);
+        break ;
+    case 7:
+        set_left_rgb(0x08, 0x00, 0x54);
+        break ;
+    }
+    count_rgb_light(side_light_table[side_light]);
+    // if (dev_info.link_mode == LINK_USB) {
+    //     if (host_keyboard_led_state().caps_lock) {
+    //         set_left_rgb(0X00, 0x80, 0x80);
+    //     }
+    // }
+
+    // else {
+    //     if (dev_info.rf_led & 0x02) {
+    //         set_left_rgb(0X00, 0x80, 0x80);
+    //     }
+    // }
+}
+
 /**
  * @brief  side_led_show.
  */
@@ -866,6 +893,7 @@ void side_led_show(void) {
 
     sys_led_show();
     rf_led_show();
+    layer_led_show();
 
     if (timer_elapsed32(side_refresh_time) > 30) {
         side_refresh_time = timer_read32();
