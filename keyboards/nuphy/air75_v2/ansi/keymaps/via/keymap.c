@@ -17,8 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
-#include "features/layer_lock.h"
-
 
 // Define a type for as many tap dance states as you need
 typedef enum {
@@ -99,7 +97,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,                _______,    _______,
     _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,                            _______,    _______,
     _______,                _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,    _______,                _______,    _______,    _______,
-    _______,    _______,    _______,                                          LLOCK,                            _______,    _______,      _______,              _______,    _______,    _______),
+    _______,    _______,    _______,                                        _______,                            _______,    _______,      _______,              _______,    _______,    _______),
 
 
 // layer 6
@@ -134,10 +132,10 @@ void dance_finished(tap_dance_state_t *state, void *user_data) {
     ql_tap_state.state = cur_dance(state);
     switch (ql_tap_state.state) {
         case TD_SINGLE_TAP:
-            tap_code(KC_APP);
+            // tap_code(KC_APP);
             break;
         case TD_SINGLE_HOLD:
-            layer_on(5);
+            layer_on(7);
             break;
         case TD_DOUBLE_TAP:
             // Check to see if the layer is already set
@@ -158,8 +156,7 @@ void dance_finished(tap_dance_state_t *state, void *user_data) {
 void dance_reset(tap_dance_state_t *state, void *user_data) {
     // If the key was held down and now is released then switch off the layer
     if (ql_tap_state.state == TD_SINGLE_HOLD) {
-        if (!is_layer_locked(5))
-            layer_off(5);
+        layer_off(7);
     }
     ql_tap_state.state = TD_NONE;
 }

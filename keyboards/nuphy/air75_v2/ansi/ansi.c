@@ -17,7 +17,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "ansi.h"
 #include "usb_main.h"
-#include "features/layer_lock.h"
 
 user_config_t user_config;
 DEV_INFO_STRUCT dev_info = {
@@ -434,8 +433,6 @@ void londing_eeprom_data(void) {
 
 /* qmk process record */
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (!process_layer_lock(keycode, record, LLOCK)) { return false; }
-
     no_act_time = 0;
     switch (keycode) {
         case RF_DFU:

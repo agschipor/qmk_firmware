@@ -47,8 +47,6 @@ enum custom_keycodes {
     MAC_DND,
     BAT_NUM,
     RGB_TEST,
-
-    LLOCK
 };
 
 typedef enum {
